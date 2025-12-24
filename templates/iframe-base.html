@@ -22,10 +22,29 @@
     </style>
     <!-- SLOT: additional-styles -->
   </head>
-  <body>
+  <body data-post-message-height="false">
     <main>
       <!-- SLOT: content -->
     </main>
+    <script>
+      (() => {
+        const { body, documentElement: root } = document;
+        if (!body || body.dataset.postMessageHeight !== "true") return;
+
+        const sendHeight = () => {
+          const height = root.scrollHeight;
+          window.parent?.postMessage({ type: "moodle-iframe-height", height }, "*");
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", sendHeight, { once: true });
+        } else {
+          sendHeight();
+        }
+
+        window.addEventListener("resize", sendHeight);
+      })();
+    </script>
     <!-- SLOT: scripts -->
   </body>
 </html>
