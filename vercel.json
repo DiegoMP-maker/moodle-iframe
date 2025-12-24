@@ -1,7 +1,13 @@
 {
   "version": 2,
   "builds": [
-    { "src": "index.html", "use": "@vercel/static" }
+    { "src": "lessons/**/index.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    {
+      "src": "/lessons/([^/]+)/?",
+      "dest": "/lessons/$1/index.html"
+    }
   ],
   "headers": [
     {
@@ -12,6 +18,3 @@
     }
   ]
 }
-
-
-
