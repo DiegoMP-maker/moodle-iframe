@@ -6,6 +6,8 @@ Integraciones en Moodle con HTML autocontenido.
 
 - `lessons/<unidad>/index.html`: actividades publicables en Vercel.
 - `templates/iframe-base.html`: plantilla base con estilos comunes y slots.
+- `assets/images/`: imágenes compartidas (mantén formatos optimizados).
+- `assets/videos/`: vídeos compartidos (versiones web y streaming).
 
 ## Rutas en Vercel
 
@@ -56,3 +58,11 @@ Usa un `<iframe>` con atributos accesibles y de carga diferida:
    - `<!-- SLOT: scripts -->`: scripts opcionales (evita dependencias externas si se embebe en Moodle).
 3. Publica la actividad con su nueva ruta, por ejemplo:
    - `/lessons/b2-nueva-unidad/`
+
+## Recomendaciones de medios (imágenes y vídeo)
+
+- **Imágenes**: usa WebP o AVIF para menor peso y buena calidad. Mantén una versión JPEG/PNG solo si necesitas máxima compatibilidad.
+- **Vídeo**: prioriza MP4 (H.264) y, si aplica, provee HLS para streaming adaptativo.
+- **`poster`**: define un `poster` en `<video>` para mostrar una portada ligera antes de reproducir.
+- **`controls`**: habilita `controls` en vídeos para que el alumnado controle la reproducción.
+- **Evita `autoplay` en iframes de Moodle**: Moodle y los navegadores suelen bloquearlo; además mejora accesibilidad y rendimiento.
