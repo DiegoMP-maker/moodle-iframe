@@ -39,6 +39,26 @@ Usa un `<iframe>` con atributos accesibles y de carga diferida:
 - Usa `width="100%"` para que el contenido sea responsive.
 - Ajusta `height` según la altura real de la actividad (p. ej., 640–900 px).
 
+## Altura automática con `postMessage` (opcional)
+
+La plantilla base incluye un script mínimo para calcular `document.documentElement.scrollHeight` y enviar un `postMessage` al contenedor padre. Está desactivado por defecto y sigue siendo seguro si JavaScript está deshabilitado (simplemente no envía nada).
+
+Para activarlo en una actividad concreta:
+
+1. En el `index.html` de la actividad, cambia el atributo del `<body>` a:
+
+   ```html
+   <body data-post-message-height="true">
+   ```
+
+2. En la plataforma (si Moodle lo permite), añade un listener en la página que incrusta el iframe para recibir el mensaje y ajustar su altura. El mensaje se envía como:
+
+   ```js
+   { type: "moodle-iframe-height", height: <number> }
+   ```
+
+> Nota: si Moodle no permite JS en el contenedor o bloquea mensajes, el iframe seguirá funcionando con una altura fija.
+
 ## Cómo localizar la URL desplegada en Vercel por lección
 
 1. Abre el proyecto en Vercel y entra al último deploy en **Deployments**.
